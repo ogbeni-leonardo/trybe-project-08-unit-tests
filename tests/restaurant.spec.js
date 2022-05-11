@@ -146,7 +146,7 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
     // objetoRetornado.pay() // Retorno: somaDosPreçosDosPedidos
     // ```
     {
-      const newFunc = createMenu({ coxinha: 1.99, agua: 5.45 })
+      const newFunc = createMenu({ food: { coxinha: 1.99 }, drink: { agua: 5.45 } })
       newFunc.order("coxinha");
       newFunc.order("agua");
       newFunc.order("coxinha");
@@ -154,13 +154,32 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
     }
 
     {
-      const newFunc = createMenu({ coxinha: 1.99, agua: 5.45, sanduiche: 9.90, coca: 6.75 })
+      const newFunc = createMenu({ food: { coxinha: 1.99, sanduiche: 9.90 }, drink: { agua: 5.45, coca: 6.75 } })
+      newFunc.order("coxinha");
+      newFunc.order("agua");
+      newFunc.order("coxinha");
+      expect(newFunc.pay()).toBe(9.43)
+    }
+
+    {
+      const newFunc = createMenu({ food: { coxinha: 1.99, sanduiche: 9.90 }, drink: { agua: 5.45, coca: 6.75 } })
       newFunc.order("coxinha");
       newFunc.order("agua");
       newFunc.order("coxinha");
       newFunc.order("sanduiche");
       newFunc.order("coca");
       expect(newFunc.pay()).toBe(26.08)
+    }
+
+    {
+      const newFunc = createMenu({ food: { coxinha: 1.99, sanduiche: 9.90 }, drink: { agua: 5.45, coca: 6.75 } })
+      newFunc.order("coxinha");
+      newFunc.order("agua");
+      newFunc.order("coxinha");
+      newFunc.order("sanduiche");
+      newFunc.order("coca");
+      newFunc.order("coca");
+      expect(newFunc.pay()).toBe(32.83)
     }
     // Agora faça o PASSO 4 no arquivo `src/restaurant.js`.
   });

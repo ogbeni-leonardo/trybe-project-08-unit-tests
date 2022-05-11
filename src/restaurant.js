@@ -100,7 +100,15 @@ const createMenu = (menu) => {
     order: (value) => object.consumption.push(value),
     pay: () => {
       let total = 0;
-      object.consumption.forEach((element) => { total += object.fetchMenu()[element]; });
+      const allCategory = Object.keys(menu);
+      object.consumption.forEach((item) => {
+        allCategory.forEach((category) => {
+          if (Object.keys(menu[category]).includes(item)) {
+            total += menu[category][item];
+          }
+        });
+      });
+
       return total;
     },
   };
