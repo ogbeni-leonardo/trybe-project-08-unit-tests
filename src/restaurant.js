@@ -97,7 +97,7 @@ const createMenu = (menu) => {
   const object = {
     fetchMenu: () => menu,
     consumption: [],
-    order: (value) => object.consumption.push(value),
+    order: (value) => { object.consumption.push(value); },
     pay: () => {
       let total = 0;
       const allCategory = Object.keys(menu);
@@ -108,8 +108,7 @@ const createMenu = (menu) => {
           }
         });
       });
-
-      return total;
+      return (total * 1.1);
     },
   };
   return object;

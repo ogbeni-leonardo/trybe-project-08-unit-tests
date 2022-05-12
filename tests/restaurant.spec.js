@@ -95,9 +95,9 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
     // objetoRetornado.consumption // Retorno: ["coxinha"]
     // ```
     {
-      const func = createMenu({})
-      func.order('coxinha')
-      expect(func.consumption).toEqual(['coxinha'])
+      const newFunc = createMenu({ food: {}, drink: {} })
+      newFunc.order('coxinha')
+      expect(newFunc.consumption).toEqual(['coxinha'])
     }
     // Agora faça o PASSO 3 no arquivo `src/restaurant.js`.
     // --------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
     // objetoRetornado.consumption // Retorno: ["coxinha", "agua", "sopa", "sashimi"]
     // ```
     {
-      const newFunc = createMenu({})
+      const newFunc = createMenu({ food: {}, drink: {} })
       newFunc.order("coxinha");
       newFunc.order("agua");
       newFunc.order("sopa");
@@ -129,7 +129,7 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
     // objetoRetornado.consumption // Retorno: ['coxinha', 'agua', 'coxinha']
     // ```
     {
-      const newFunc = createMenu({})
+      const newFunc = createMenu({ food: {}, drink: {} })
       newFunc.order("coxinha");
       newFunc.order("agua");
       newFunc.order("coxinha");
@@ -150,7 +150,7 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
       newFunc.order("coxinha");
       newFunc.order("agua");
       newFunc.order("coxinha");
-      expect(newFunc.pay()).toBe(9.43)
+      expect(newFunc.pay()).toBeCloseTo(10.37)
     }
 
     {
@@ -158,17 +158,7 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
       newFunc.order("coxinha");
       newFunc.order("agua");
       newFunc.order("coxinha");
-      expect(newFunc.pay()).toBe(9.43)
-    }
-
-    {
-      const newFunc = createMenu({ food: { coxinha: 1.99, sanduiche: 9.90 }, drink: { agua: 5.45, coca: 6.75 } })
-      newFunc.order("coxinha");
-      newFunc.order("agua");
-      newFunc.order("coxinha");
-      newFunc.order("sanduiche");
-      newFunc.order("coca");
-      expect(newFunc.pay()).toBe(26.08)
+      expect(newFunc.pay()).toBeCloseTo(10.37)
     }
 
     {
@@ -178,8 +168,18 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
       newFunc.order("coxinha");
       newFunc.order("sanduiche");
       newFunc.order("coca");
+      expect(newFunc.pay()).toBeCloseTo(28.69)
+    }
+
+    {
+      const newFunc = createMenu({ food: { coxinha: 1.99, sanduiche: 9.90 }, drink: { agua: 5.45, coca: 6.75 } })
+      newFunc.order("coxinha");
+      newFunc.order("agua");
+      newFunc.order("coxinha");
+      newFunc.order("sanduiche");
       newFunc.order("coca");
-      expect(newFunc.pay()).toBe(32.83)
+      newFunc.order("coca");
+      expect(newFunc.pay()).toBeCloseTo(36.11)
     }
     // Agora faça o PASSO 4 no arquivo `src/restaurant.js`.
   });
